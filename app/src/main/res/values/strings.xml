@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">PizzaShop</string>
+    <string name="name">Name</string>
+    <string name="todo">TODO</string>
+    <string name="phone_number">Phone number</string>
+    <string name="type_de_pizza">Pizza type</string>
+    <string name="address">Address</string>
+    <string name="cheese">cheese</string>
+    <string name="olive">Olive</string>
+    <string name="mushroom">Mushroom</string>
+    <string name="bacon">Bacon</string>
+    <string name="ham">Ham</string>
+    <string name="pineapple">Pineapple</string>
+    <string name="order">Order</string>
+    <string name="toppings">Toppings</string>
+    <string name="textview">TextView</string>
+    <string name="_5">5</string>
+    <string-array name="pizzaTypes">
+        <item>Moyenne</item>
+        <item>Mini</item>
+        <item>Maxi</item>
+    </string-array>
+</resources>
