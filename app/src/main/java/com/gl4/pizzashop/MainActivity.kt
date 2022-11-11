@@ -1,5 +1,6 @@
 package com.gl4.pizzashop
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Button
 import android.widget.Toast
 import com.google.android.material.textfield.TextInputEditText
 
@@ -15,7 +17,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var txtPhone: TextInputEditText
     private lateinit var txtAddress: TextInputEditText
     private lateinit var pizzaType: AutoCompleteTextView
+    private lateinit var orderButton: Button
 
+    @SuppressLint("CutPasteId", "MissingInflatedId", "QueryPermissionsNeeded")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main);
@@ -27,10 +31,9 @@ class MainActivity : AppCompatActivity() {
         txtPhone = findViewById(R.id.phone);
         txtAddress = findViewById(R.id.address);
         pizzaType = findViewById(R.id.autoCompleteTextView);
-    }
+        orderButton = findViewById(R.id.orderButton);
 
-    fun order(view: View) {
-        if (view.id == R.id.textButton) {
+        orderButton.setOnClickListener {
             val toast =
                 Toast.makeText(applicationContext, "Thanks for your order", Toast.LENGTH_SHORT);
             toast.show();
@@ -42,15 +45,15 @@ class MainActivity : AppCompatActivity() {
             val order =
                 "$name, your $pizza pizza will be delivered to $address we will call you on your phone number $phone";
 
-            val intent = Intent(view.context, SplashScreen::class.java);
+            val intent = Intent(this@MainActivity, SplashScreen::class.java);
             intent.putExtra("order", order);
             startActivity(intent);
 
-            val intentMail = Intent(Intent.ACTION_SENDTO);
-            intent.data = Uri.parse("mailto:"); // only email apps should handle this
-            intent.putExtra(Intent.EXTRA_EMAIL, "pizzashop@mydomain.tn");
-            intent.putExtra(Intent.EXTRA_SUBJECT, order);
-            if (intent.resolveActivity(packageManager) != null) {
+            val intentMail = Intent(Intent.ACTION_SEND);
+            intentMail.data = Uri.parse("mailto:"); // only email apps should handle this
+            intentMail.putExtra(Intent.EXTRA_EMAIL, "pizzashop@mydomain.tn");
+            intentMail.putExtra(Intent.EXTRA_SUBJECT, order);
+            if (intentMail.resolveActivity(packageManager) != null) {
                 startActivity(intentMail);
             }
         }

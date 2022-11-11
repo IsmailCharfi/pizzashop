@@ -16,7 +16,6 @@ class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
-
         val order = intent.getStringExtra("order");
         txtOrder = findViewById(R.id.splashText);
         txtTime = findViewById(R.id.timerView);
@@ -24,7 +23,7 @@ class SplashScreen : AppCompatActivity() {
         timer.start()
     }
 
-    val timer = object : CountDownTimer(5000, 1000) {
+    private val timer = object : CountDownTimer(5000, 1000) {
         override fun onTick(millisUntilFinished: Long) {
             txtTime.text = (millisUntilFinished / 1000).toString()
         }
